@@ -12,7 +12,7 @@ Crie um método `checkNumber` que recebe um número inteiro e imprime:
 
 ## Código
 
-### PositivoNegativoZero.java
+### PositiveNegativeZero.java
 ```java
 public class PositiveNegativeZero {
     public static void checkNumber(int number) {
@@ -22,7 +22,7 @@ public class PositiveNegativeZero {
 }
 ```
 
-### Main.java
+### MainExerc01.java
 ```java
 import java.util.Scanner;
 
