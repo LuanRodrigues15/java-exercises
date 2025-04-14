@@ -21,8 +21,11 @@ O curso ensina:
 Este curso é ideal tanto para iniciantes quanto para desenvolvedores que desejam aprimorar suas habilidades em Java, com um enfoque prático e no desenvolvimento de aplicações reais.
 
 ---
+
 ## Lista de Exercícios
 
 A lista de exercícios que estou resolvendo durante o curso está disponível na pasta [`ListaExercicios`](./ListaExercicios).  
 Se quiser praticar, fique à vontade para tentar resolver os desafios por conta própria antes de conferir as minhas soluções. É uma ótima forma de testar seus conhecimentos e comparar abordagens diferentes!
+
 ---
+

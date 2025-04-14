@@ -30,9 +30,9 @@ public class MegaBytesConverter {
 }
 ```
 
-### MainExerc03.java
+### MainExerc04.java
 ```java
-public class MainExerc03 {
+public class MainExerc04 {
     public static void main(String[] args) {
         MegaBytesConverter.printMegaBytesAndKiloBytes(2500);
         MegaBytesConverter.printMegaBytesAndKiloBytes(-1024);
@@ -44,7 +44,7 @@ public class MainExerc03 {
 ## Como Executar
 
 1. Compile os arquivos `.java`.
-2. Execute a classe `MainExerc03`.
+2. Execute a classe `MainExerc04`.
 3. Veja as conversões de KB para MB e KB no console.
 
 ---
