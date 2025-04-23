@@ -827,6 +827,86 @@ multiply= 0.0
 divide= 0.0
 ```
 
+### Observações:
+- Todos os métodos devem ser `public`.
+- Nenhum método deve ser `static`.
+- Total de **8 métodos** na classe.
+
+---
+
+## Exercício 31 — Classe Person e Validação de Idade
+
+- **Descrição:**  
+  Crie uma classe chamada `Person` que armazena informações básicas sobre uma pessoa, incluindo nome, sobrenome e idade. A classe também realiza validações e fornece métodos auxiliares.
+
+### Estrutura da Classe
+
+**Campos:**
+- `firstName` (String) — primeiro nome da pessoa.
+- `lastName` (String) — sobrenome da pessoa.
+- `age` (int) — idade da pessoa.
+
+
+### Métodos:
+
+- `public String getFirstName()`  
+  Retorna o valor de `firstName`.
+
+- `public String getLastName()`  
+  Retorna o valor de `lastName`.
+
+- `public int getAge()`  
+  Retorna o valor de `age`.
+
+- `public void setFirstName(String firstName)`  
+  Define o valor de `firstName`.
+
+- `public void setLastName(String lastName)`  
+  Define o valor de `lastName`.
+
+- `public void setAge(int age)`  
+  Define o valor de `age`.  
+  Se o valor for menor que `0` ou maior que `100`, define `age = 0`.
+
+- `public boolean isTeen()`  
+  Retorna `true` se `age` estiver entre `13` e `19` (inclusive), senão retorna `false`.
+
+- `public String getFullName()`  
+  Retorna o nome completo da pessoa, conforme as regras:
+    - Se ambos `firstName` e `lastName` estiverem vazios, retorna `""`.
+    - Se apenas `lastName` estiver vazio, retorna `firstName`.
+    - Se apenas `firstName` estiver vazio, retorna `lastName`.
+    - Caso contrário, retorna `firstName + " " + lastName`.
+
+
+### Exemplo de Teste
+
+```java
+Person person = new Person();
+person.setFirstName("");   // firstName é vazio
+person.setLastName("");    // lastName é vazio
+person.setAge(10);
+System.out.println("fullName= " + person.getFullName());
+System.out.println("teen= " + person.isTeen());
+
+person.setFirstName("John");
+person.setAge(18);
+System.out.println("fullName= " + person.getFullName());
+System.out.println("teen= " + person.isTeen());
+
+person.setLastName("Smith");
+System.out.println("fullName= " + person.getFullName());
+```
+
+**Saída Esperada:**
+```
+fullName=
+teen= false
+fullName= John
+teen= true
+fullName= John Smith
+```
+
 
 
 ### Observações:
@@ -835,4 +915,452 @@ divide= 0.0
 - Total de **8 métodos** na classe.
 
 ---
+
+## Exercício 32 — Cálculo da Área da Parede
+
+- **Descrição:**  
+  Crie uma classe chamada `Wall` que armazena as dimensões de uma parede e calcula sua área. A classe também deve realizar validações ao definir os valores de largura e altura.
+
+
+### Estrutura da Classe
+
+**Campos:**
+- `width` (double) — largura da parede.
+- `height` (double) — altura da parede.
+
+
+### Construtores:
+
+- `Wall()`  
+  Construtor sem parâmetros. Inicializa os campos com os valores padrão (`0.0`).
+
+- `Wall(double width, double height)`  
+  Construtor que recebe dois parâmetros.
+    - Se `width < 0`, define `width = 0`.
+    - Se `height < 0`, define `height = 0`.
+
+
+### Métodos:
+
+- `public double getWidth()`  
+  Retorna o valor de `width`.
+
+- `public double getHeight()`  
+  Retorna o valor de `height`.
+
+- `public void setWidth(double width)`  
+  Define o valor de `width`.  
+  Se `width < 0`, define como `0`.
+
+- `public void setHeight(double height)`  
+  Define o valor de `height`.  
+  Se `height < 0`, define como `0`.
+
+- `public double getArea()`  
+  Retorna a área da parede, calculada como `width * height`.
+
+
+### Exemplo de Teste
+
+```java
+Wall wall = new Wall(5, 4);
+System.out.println("area= " + wall.getArea());
+
+wall.setHeight(-1.5);
+System.out.println("width= " + wall.getWidth());
+System.out.println("height= " + wall.getHeight());
+System.out.println("area= " + wall.getArea());
+```
+
+**Saída Esperada:**
+```
+area= 20.0
+width= 5.0
+height= 0.0
+area= 0.0
+```
+
+### Observações:
+- Todos os métodos devem ser `public`.
+- Nenhum método deve ser `static`.
+- Total de **2 construtores** e **5 métodos**.
+
+---
+
+## Exercício 33 — Cálculo de Distância entre Pontos
+
+- **Descrição:**  
+  Crie uma classe chamada `Point` que representa um ponto no plano 2D com coordenadas inteiras `x` e `y`. A classe deve permitir calcular distâncias entre pontos utilizando a fórmula da distância euclidiana.
+
+
+### Estrutura da Classe
+
+**Campos:**
+- `x` (int) — coordenada X.
+- `y` (int) — coordenada Y.
+
+
+### Construtores:
+
+- `Point()`  
+  Construtor sem parâmetros. Inicializa os campos `x` e `y` com valor 0.
+
+- `Point(int x, int y)`  
+  Construtor com parâmetros que inicializa os campos com os valores fornecidos.
+
+### Métodos:
+
+- `public int getX()`  
+  Retorna o valor de `x`.
+
+- `public int getY()`  
+  Retorna o valor de `y`.
+
+- `public void setX(int x)`  
+  Define o valor de `x`.
+
+- `public void setY(int y)`  
+  Define o valor de `y`.
+
+- `public double distance()`  
+  Retorna a distância deste ponto até o ponto `(0, 0)`.
+
+- `public double distance(Point another)`  
+  Retorna a distância deste ponto até o ponto `another`.
+
+- `public double distance(int x, int y)`  
+  Retorna a distância deste ponto até o ponto com coordenadas `x`, `y`.
+
+> **Fórmula da distância:**
+ $$ \text{dist} = \sqrt{(x2 - x1)^2 + (y2 - y1)^2} $$
+
+
+### Exemplo de Teste
+
+```java
+Point first = new Point(6, 5);
+Point second = new Point(3, 1);
+System.out.println("distance(0,0)= " + first.distance());
+System.out.println("distance(second)= " + first.distance(second));
+System.out.println("distance(2,2)= " + first.distance(2, 2));
+Point point = new Point();
+System.out.println("distance()= " + point.distance());
+```
+
+**Saída Esperada:**
+```
+distance(0,0)= 7.810249675906654
+distance(second)= 5.0
+distance(2,2)= 5.0
+distance()= 0.0
+```
+
+### Observações:
+- Utilize `Math.sqrt()` para cálculo de raiz quadrada.
+- Evite código duplicado reutilizando métodos já implementados.
+- Todos os métodos devem ser `public`.
+- Nenhum método deve ser `static`.
+- Total de **2 construtores** e **7 métodos**.
+
+---
+
+## Exercício 34 — Calculadora de Custo de Carpete
+
+- **Descrição:**  
+  Desenvolva uma aplicação que calcule o custo para cobrir um piso retangular com carpete. O valor total é calculado multiplicando a área do piso pelo custo por metro quadrado do carpete.
+
+
+### 1. Classe `Floor`
+
+**Campos:**
+- `width` (double)
+- `length` (double)
+
+**Construtor:**
+- `Floor(double width, double length)`  
+  Inicializa os campos. Se `width < 0`, define como 0. Se `length < 0`, define como 0.
+
+**Método:**
+- `public double getArea()`  
+  Retorna a área do piso (`width * length`).
+
+
+### 2. Classe `Carpet`
+
+**Campo:**
+- `cost` (double)
+
+**Construtor:**
+- `Carpet(double cost)`  
+  Inicializa o campo. Se `cost < 0`, define como 0.
+
+**Método:**
+- `public double getCost()`  
+  Retorna o valor do campo `cost`.
+
+### 3. Classe `Calculator`
+
+**Campos:**
+- `floor` (Floor)
+- `carpet` (Carpet)
+
+**Construtor:**
+- `Calculator(Floor floor, Carpet carpet)`  
+  Inicializa os campos.
+
+**Método:**
+- `public double getTotalCost()`  
+  Retorna o custo total (`floor.getArea() * carpet.getCost()`).
+
+### Exemplo de Teste
+
+```java
+Carpet carpet = new Carpet(3.5);
+Floor floor = new Floor(2.75, 4.0);
+Calculator calculator = new Calculator(floor, carpet);
+System.out.println("total= " + calculator.getTotalCost());
+
+carpet = new Carpet(1.5);
+floor = new Floor(5.4, 4.5);
+calculator = new Calculator(floor, carpet);
+System.out.println("total= " + calculator.getTotalCost());
+```
+
+**Saída Esperada:**
+```
+total= 38.5
+total= 36.45
+```
+
+### Observações:
+- Todos os métodos devem ser `public`.
+- Nenhum método deve ser `static`.
+- Cada classe deve estar em seu próprio arquivo.
+- Total de **3 classes** e **5 métodos**.
+
+---
+
+## Exercício 35 — Operações com Números Complexos
+
+- **Descrição:**  
+  Um número complexo pode ser expresso na forma $( a + bi )$, onde $( a )$ e $( b )$ são números reais, e $( i )$ é uma solução da equação $( x^2 = -1 )$. Como nenhum número real satisfaz essa equação, $( i )$ é chamado de número imaginário. Para realizar operações de adição e subtração de números complexos, basta somar ou subtrair as partes reais e imaginárias correspondentes.
+
+
+### 1. Classe `ComplexNumber`
+
+**Campos:**
+- `real` (double)
+- `imaginary` (double)
+
+**Construtor:**
+- `ComplexNumber(double real, double imaginary)`  
+  Inicializa os campos com os valores fornecidos para as partes real e imaginária.
+
+**Métodos:**
+- `public double getReal()`  
+  Retorna o valor da parte real do número complexo.
+
+- `public double getImaginary()`  
+  Retorna o valor da parte imaginária do número complexo.
+
+- `public void add(double real, double imaginary)`  
+  Adiciona os valores fornecidos para a parte real e a parte imaginária ao número complexo.
+
+- `public void add(ComplexNumber number)`  
+  Adiciona outro número complexo ao número atual, somando suas partes reais e imaginárias.
+
+- `public void subtract(double real, double imaginary)`  
+  Subtrai os valores fornecidos para a parte real e a parte imaginária do número complexo.
+
+- `public void subtract(ComplexNumber number)`  
+  Subtrai outro número complexo do número atual, subtraindo suas partes reais e imaginárias.
+
+
+### Exemplo de Teste
+
+```java
+ComplexNumber one = new ComplexNumber(1.0, 1.0);
+ComplexNumber number = new ComplexNumber(2.5, -1.5);
+one.add(1, 1);
+System.out.println("one.real= " + one.getReal());
+System.out.println("one.imaginary= " + one.getImaginary());
+one.subtract(number);
+System.out.println("one.real= " + one.getReal());
+System.out.println("one.imaginary= " + one.getImaginary());
+number.subtract(one);
+System.out.println("number.real= " + number.getReal());
+System.out.println("number.imaginary= " + number.getImaginary());
+```
+
+**Saída Esperada:**
+```
+one.real= 2.0
+one.imaginary= 2.0
+one.real= -0.5
+one.imaginary= 3.5
+number.real= 3.0
+number.imaginary= -5.0
+```
+
+### Observações:
+- Todos os métodos devem ser `public`.
+- Nenhum método deve ser `static`.
+- Total de **6 métodos**.
+
+---
+
+## Exercício 36 — Classe Círculo com Herança de Cilindro
+
+- **Descrição:**  
+  Este exercício envolve a criação de duas classes. A primeira, `Circle`, representa um círculo e a segunda, `Cylinder`, herda de `Circle` e representa um cilindro. O cilindro tem uma altura adicional que, combinada com a área do círculo, permite calcular o volume do cilindro.
+
+### 1. Classe `Circle`
+
+**Campos:**
+- `radius` (double): Representa o raio do círculo.
+
+**Construtor:**
+- `Circle(double radius)`  
+  Inicializa o campo `radius` com o valor fornecido. Caso o valor de `radius` seja negativo, o campo será configurado como 0.
+
+**Métodos:**
+- `public double getRadius()`  
+  Retorna o valor do campo `radius`.
+
+- `public double getArea()`  
+  Retorna a área do círculo, calculada como \( \text{area} = \pi \times \text{radius}^2 \), usando a constante `Math.PI`.
+
+
+### 2. Classe `Cylinder` (Herda de `Circle`)
+
+**Campos:**
+- `height` (double): Representa a altura do cilindro.
+
+**Construtor:**
+- `Cylinder(double radius, double height)`  
+  Inicializa o campo `radius` através do construtor da classe pai `Circle`, e o campo `height` com o valor fornecido. Caso o valor de `height` seja negativo, o campo será configurado como 0.
+
+**Métodos:**
+- `public double getHeight()`  
+  Retorna o valor do campo `height`.
+
+- `public double getVolume()`  
+  Retorna o volume do cilindro, calculado como \( \text{volume} = \text{area do círculo} \times \text{height} \).
+
+
+### Exemplo de Teste
+
+```java
+Circle circle = new Circle(3.75);
+System.out.println("circle.radius= " + circle.getRadius());
+System.out.println("circle.area= " + circle.getArea());
+
+Cylinder cylinder = new Cylinder(5.55, 7.25);
+System.out.println("cylinder.radius= " + cylinder.getRadius());
+System.out.println("cylinder.height= " + cylinder.getHeight());
+System.out.println("cylinder.area= " + cylinder.getArea());
+System.out.println("cylinder.volume= " + cylinder.getVolume());
+```
+
+**Saída Esperada:**
+```
+circle.radius= 3.75
+circle.area= 44.178646691106465
+cylinder.radius= 5.55
+cylinder.height= 7.25
+cylinder.area= 96.76890771219959
+cylinder.volume= 701.574580913447
+```
+
+
+### Observações:
+- Todos os métodos devem ser `public`.
+- Nenhum método deve ser `static`.
+- Total de **2 classes**.
+- **Herança** é utilizada na classe `Cylinder`, que herda da classe `Circle`.
+
+---
+
+## Exercício 37 — Cálculo de Área e Volume de um Cubóide
+
+- **Descrição:**  
+  O objetivo deste exercício é calcular o volume de uma piscina com formato de cubóide, utilizando duas classes: `Rectangle` e `Cuboid`. A classe `Cuboid` herda da classe `Rectangle` e adiciona a dimensão `height` para calcular o volume.
+
+
+### 1. Classe `Rectangle`
+
+**Campos:**
+- `width` (double): Representa a largura do retângulo.
+- `length` (double): Representa o comprimento do retângulo.
+
+**Construtor:**
+- `Rectangle(double width, double length)`  
+  Inicializa os campos `width` e `length` com os valores fornecidos. Caso o valor de `width` ou `length` seja negativo, o campo correspondente será configurado como 0.
+
+**Métodos:**
+- `public double getWidth()`  
+  Retorna o valor do campo `width`.
+
+- `public double getLength()`  
+  Retorna o valor do campo `length`.
+
+- `public double getArea()`  
+  Retorna a área do retângulo, calculada como $( \text{area} = \text{width} \times \text{length} )$.
+
+
+### 2. Classe `Cuboid` (Herda de `Rectangle`)
+
+**Campos:**
+- `height` (double): Representa a altura do cubóide.
+
+**Construtor:**
+- `Cuboid(double width, double length, double height)`  
+  Inicializa os campos `width` e `length` através do construtor da classe `Rectangle`, e o campo `height` com o valor fornecido. Caso o valor de `height` seja negativo, o campo será configurado como 0.
+
+**Métodos:**
+- `public double getHeight()`  
+  Retorna o valor do campo `height`.
+
+- `public double getVolume()`  
+  Retorna o volume do cubóide, calculado como $( \text{volume} = \text{area do retângulo} \times \text{height} )$.
+
+
+### Exemplo de Teste
+
+```java
+Rectangle rectangle = new Rectangle(5, 10);
+System.out.println("rectangle.width= " + rectangle.getWidth());
+System.out.println("rectangle.length= " + rectangle.getLength());
+System.out.println("rectangle.area= " + rectangle.getArea());
+
+Cuboid cuboid = new Cuboid(5, 10, 5);
+System.out.println("cuboid.width= " + cuboid.getWidth());
+System.out.println("cuboid.length= " + cuboid.getLength());
+System.out.println("cuboid.area= " + cuboid.getArea());
+System.out.println("cuboid.height= " + cuboid.getHeight());
+System.out.println("cuboid.volume= " + cuboid.getVolume());
+```
+
+**Saída Esperada:**
+```
+rectangle.width= 5.0
+rectangle.length= 10.0
+rectangle.area= 50.0
+cuboid.width= 5.0
+cuboid.length= 10.0
+cuboid.area= 50.0
+cuboid.height= 5.0
+cuboid.volume= 250.0
+```
+
+### Observações:
+- Todos os métodos devem ser `public`.
+- Nenhum método deve ser `static`.
+- Total de **2 classes**.
+- **Herança** é utilizada na classe `Cuboid`, que herda da classe `Rectangle`.
+
+---
+
+
+
 
