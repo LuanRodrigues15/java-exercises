@@ -1361,6 +1361,270 @@ cuboid.volume= 250.0
 
 ---
 
+# Seção 8: Advanced OOP Techniques: Composition, Encapsulation, and Polymorphism in Action
+
+## Exercício 38 — Composição de Classes: Quarto com Cama, Lâmpada e Paredes
+
+- **Descrição:**  
+  Neste exercício, o objetivo é praticar a **composição de classes** em Java. Você criará cinco classes relacionadas a um quarto: `Lamp`, `Bed`, `Ceiling`, `Wall` e `Bedroom`, e utilizará composição para montar uma estrutura de cômodo.
+
+
+### 1. Classe `Lamp`
+
+**Campos (privados):**
+- `style` (String)
+- `battery` (boolean)
+- `globRating` (int)
+
+**Construtor:**
+- `Lamp(String style, boolean battery, int globRating)`
+
+**Métodos:**
+- `public void turnOn()` → imprime `"Lamp -> Turning on"`
+- `public String getStyle()`
+- `public boolean isBattery()`
+- `public int getGlobRating()`
+
+
+### 2. Classe `Bed`
+
+**Campos (privados):**
+- `style` (String)
+- `pillows`, `height`, `sheets`, `quilt` (int)
+
+**Construtor:**
+- `Bed(String style, int pillows, int height, int sheets, int quilt)`
+
+**Métodos:**
+- `public void make()` → imprime `"Bed -> Making | "`
+- `public String getStyle()`
+- `public int getPillows()`
+- `public int getHeight()`
+- `public int getSheets()`
+- `public int getQuilt()`
+
+
+### 3. Classe `Ceiling`
+
+**Campos (privados):**
+- `height` (int)
+- `paintedColor` (int)
+
+**Construtor:**
+- `Ceiling(int height, int paintedColor)`
+
+**Métodos:**
+- `public int getHeight()`
+- `public int getPaintedColor()`
+
+### 4. Classe `Wall`
+
+**Campo (privado):**
+- `direction` (String)
+
+**Construtor:**
+- `Wall(String direction)`
+
+**Método:**
+- `public String getDirection()`
+
+### 5. Classe `Bedroom`
+
+**Campos (privados):**
+- `name` (String)
+- `wall1`, `wall2`, `wall3`, `wall4` (Wall)
+- `ceiling` (Ceiling)
+- `bed` (Bed)
+- `lamp` (Lamp)
+
+**Construtor:**
+- `Bedroom(String name, Wall wall1, Wall wall2, Wall wall3, Wall wall4, Ceiling ceiling, Bed bed, Lamp lamp)`
+
+**Métodos:**
+- `public Lamp getLamp()`
+- `public void makeBed()` → imprime `"Bedroom -> Making bed | "` e chama `bed.make()`
+
+### Exemplo de Teste
+
+```java
+Wall wall1 = new Wall("West");
+Wall wall2 = new Wall("East");
+Wall wall3 = new Wall("South");
+Wall wall4 = new Wall("North");
+
+Ceiling ceiling = new Ceiling(12, 55);
+
+Bed bed = new Bed("Modern", 4, 3, 2, 1);
+
+Lamp lamp = new Lamp("Classic", false, 75);
+
+Bedroom bedRoom = new Bedroom("YOUR NAME HERE", wall1, wall2, wall3, wall4, ceiling, bed, lamp);
+bedRoom.makeBed();
+
+bedRoom.getLamp().turnOn();
+```
+
+**Saída Esperada:**
+```
+Bedroom -> Making bed | Bed -> Making | Lamp -> Turning on
+```
+
+### Observações:
+- Todos os campos devem ser privados.
+- Todos os métodos devem ser `public` (não estáticos).
+- Cada classe deve estar em seu próprio arquivo (`Lamp.java`, `Bed.java`, etc).
+- Utilize **composição**, não herança.
+
+---
+
+## Exercício 39 — Impressora com Encapsulamento: Toner e Impressão Duplex
+
+- **Descrição:**  
+  O objetivo deste exercício é reforçar o uso do **encapsulamento** em Java, criando uma classe `Printer` com lógica para adicionar toner, imprimir páginas (inclusive em modo duplex) e acompanhar o total de páginas impressas.
+
+### Classe `Printer`
+
+**Campos (privados):**
+- `int tonerLevel`
+- `int pagesPrinted`
+- `boolean duplex`
+
+### Construtor:
+
+```java
+Printer(int tonerLevel, boolean duplex)
+```
+
+- Inicializa o campo `tonerLevel` **somente se** o valor estiver entre 0 e 100 (inclusive). Caso contrário, define `tonerLevel = -1`.
+- Define `duplex` com base no parâmetro.
+- Inicializa `pagesPrinted` como 0.
+
+### Métodos:
+
+#### `public int addToner(int tonerAmount)`
+- Retorna `-1` se `tonerAmount` for menor ou igual a 0, ou maior que 100.
+- Se `tonerLevel + tonerAmount` ultrapassar 100, retorna `-1`.
+- Caso contrário, adiciona o valor ao nível de toner atual e retorna o novo `tonerLevel`.
+
+#### `public int printPages(int pages)`
+- Cria uma variável local `pagesToPrint` com valor igual ao parâmetro `pages`.
+- Se `duplex == true`, imprime mensagem `"Printing in duplex mode"` e divide `pagesToPrint` por 2, somando 1 se `pages` for ímpar (usando `%`).
+- Soma `pagesToPrint` ao campo `pagesPrinted`.
+- Retorna `pagesToPrint`.
+
+#### `public int getPagesPrinted()`
+- Retorna o valor atual de `pagesPrinted`.
+
+### Exemplo de Teste
+
+```java
+Printer printer = new Printer(50, true);
+System.out.println(printer.addToner(50));
+System.out.println("initial page count = " + printer.getPagesPrinted());
+int pagesPrinted = printer.printPages(4);
+System.out.println("Pages printed was " + pagesPrinted + " new total print count for printer = " + printer.getPagesPrinted());
+pagesPrinted = printer.printPages(2);
+System.out.println("Pages printed was " + pagesPrinted + " new total print count for printer = " + printer.getPagesPrinted());
+```
+
+### Saída Esperada:
+
+```
+100
+initial page count = 0
+Printing in duplex mode
+Pages printed was 2 new total print count for printer = 2
+Printing in duplex mode
+Pages printed was 1 new total print count for printer = 3
+```
+
+### Observações:
+- Todos os campos devem ser `private`.
+- Todos os métodos devem ser `public` (e **não** `static`).
+- Utilize operações matemáticas (`/` e `%`) para calcular as páginas em modo duplex.
+
+---
+
+## Exercício 40 — Polimorfismo: Classes de Veículos
+
+### Descrição:
+Neste exercício, você vai criar uma hierarquia de classes de veículos. A classe `Car` será a classe base, e três classes derivadas, `Mitsubishi`, `Ford` e `Holden`, irão sobrescrever métodos da classe base.
+
+### Classes:
+
+#### 1) Classe `Car`:
+- **Campos privados:**
+    - `engine` (boolean)
+    - `cylinders` (int)
+    - `name` (String)
+    - `wheels` (int)
+
+- **Construtor:**
+    - O construtor da classe `Car` recebe dois parâmetros: `cylinders` (int) e `name` (String).
+    - A classe `Car` possui um motor (`engine = true`) e 4 rodas por padrão (`wheels = 4`).
+
+- **Métodos:**
+    - `startEngine()`: Retorna uma mensagem indicando que o motor está sendo ligado.
+    - `accelerate()`: Retorna uma mensagem indicando que o carro está acelerando.
+    - `brake()`: Retorna uma mensagem indicando que o carro está freando.
+    - `getCylinders()`: Retorna o número de cilindros.
+    - `getName()`: Retorna o nome do carro.
+
+#### 2) Subclasses de `Car`:
+As classes `Mitsubishi`, `Ford` e `Holden` herdam a classe `Car`. Cada uma delas deve sobrescrever os métodos `startEngine()`, `accelerate()` e `brake()` para retornar mensagens específicas para o tipo de carro.
+
+
+### Exemplo de Execução:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Car car = new Car(8, "Base car");
+        System.out.println(car.startEngine());
+        System.out.println(car.accelerate());
+        System.out.println(car.brake());
+
+        Mitsubishi mitsubishi = new Mitsubishi(6, "Outlander VRX 4WD");
+        System.out.println(mitsubishi.startEngine());
+        System.out.println(mitsubishi.accelerate());
+        System.out.println(mitsubishi.brake());
+
+        Ford ford = new Ford(6, "Ford Falcon");
+        System.out.println(ford.startEngine());
+        System.out.println(ford.accelerate());
+        System.out.println(ford.brake());
+
+        Holden holden = new Holden(6, "Holden Commodore");
+        System.out.println(holden.startEngine());
+        System.out.println(holden.accelerate());
+        System.out.println(holden.brake());
+    }
+}
+```
+
+### Saída Esperada:
+
+```
+Car -> startEngine()
+Car -> accelerate()
+Car -> brake()
+Mitsubishi -> startEngine()
+Mitsubishi -> accelerate()
+Mitsubishi -> brake()
+Ford -> startEngine()
+Ford -> accelerate()
+Ford -> brake()
+Holden -> startEngine()
+Holden -> accelerate()
+Holden -> brake()
+```
+
+### Observações:
+- O uso de **polimorfismo** permite que o método sobrescrito seja chamado com base no tipo da instância do objeto (Mitsubishi, Ford, Holden), mesmo que a referência seja de tipo `Car`.
+- Lembre-se de **não incluir o método `main`** nas classes que serão avaliadas. Apenas os métodos de cada classe devem ser submetidos.
+
+---
+
 
 
 
