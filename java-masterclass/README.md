@@ -29,3 +29,6 @@ Se quiser praticar, fique à vontade para tentar resolver os desafios por conta 
 
 ---
 
+## Minhas Soluções
+
+As soluções dos exercícios resolvidos por mim estão organizadas na pasta [`minhas-solucoes`](./minhas-solucoes).
